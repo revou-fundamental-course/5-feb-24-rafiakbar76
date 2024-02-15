@@ -4,41 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Celsius to Fahrenheit Converter</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="number"] {
+            width: 50%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <!-- Add your logo image here -->
-        <img src="logo.png" alt="Logo" width="150" height="150" />
-    </header>
-    <main>
-        <section>
-            <h1>Celsius to Fahrenheit Converter</h1>
-            <form id="conversion-form">
-                <label for="celsius">Celsius:</label>
-                <input type="number" id="celsius" name="celsius" value="90" />
+    <div class="container">
+        <!-- Celsius input -->
+        <input type="number" id="celsius" value="90" />
 
-                <button type="submit">Convert</button>
-            </form>
-            <div id="result"></div>
-        </section>
-        <section id="instructions">
-            <h2>Instructions:</h2>
-            <ul>
-                <li>Type the temperature in Celsius.</li>
-                <li>Click the 'Convert' button to get the Fahrenheit temperature.</li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p>© 2023 Celsius Fahrenheit Converter</p>
-    </footer>
+        <!-- Convert button -->
+        <button id="convert-btn">Convert</button>
+
+        <!-- Result display -->
+        <div id="result"></div>
+
+        <!-- Reset button -->
+        <button id="reset-btn">Reset</button>
+    </div>
 
     <!-- Conversion logic -->
     <script>
         // Get HTML elements
-        const form = document.getElementById("conversion-form");
         const celsiusInput = document.getElementById("celsius");
+        const convertBtn = document.getElementById("convert-btn");
+        const resetBtn = document.getElementById("reset-btn");
         const result = document.getElementById("result");
 
         // Conversion function
@@ -46,12 +53,17 @@
             return (parseFloat(celsius) * 9 / 5) + 32;
         }
 
-        // Submit the form and convert Celsius to Fahrenheit
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const celsiusValue = celsiusInput.value;
-            const fahrenheitValue = celsiusToFahrenheit(celsiusValue);
-            result.textContent = `${celsiusValue}°C is equal to ${fahrenheitValue}°F`;
+        // Convert Celsius to Fahrenheit on button click
+        convertBtn.addEventListener("click", () => {
+            const celsius = celsiusInput.value;
+            const fahrenheit = celsiusToFahrenheit(celsius);
+            result.textContent = `${celsius}°C is equal to ${fahrenheit}°F`;
+        });
+
+        // Reset input and result on button click
+        resetBtn.addEventListener("click", () => {
+            celsiusInput.value = "";
+            result.textContent = "";
         });
 
         // Set initial Celsius value to 90°C
