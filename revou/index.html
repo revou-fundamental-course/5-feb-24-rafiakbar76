@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celsius to Fahrenheit Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <!-- Add your logo image here -->
+        <img src="logo.png" alt="Logo" width="150" height="150" />
+    </header>
+    <main>
+        <section>
+            <h1>Celsius to Fahrenheit Converter</h1>
+            <form id="conversion-form">
+                <label for="celsius">Celsius:</label>
+                <input type="number" id="celsius" name="celsius" value="90" />
+
+                <button type="submit">Convert</button>
+            </form>
+            <div id="result"></div>
+        </section>
+        <section id="instructions">
+            <h2>Instructions:</h2>
+            <ul>
+                <li>Type the temperature in Celsius.</li>
+                <li>Click the 'Convert' button to get the Fahrenheit temperature.</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>© 2023 Celsius Fahrenheit Converter</p>
+    </footer>
+
+    <!-- Conversion logic -->
+    <script>
+        // Get HTML elements
+        const form = document.getElementById("conversion-form");
+        const celsiusInput = document.getElementById("celsius");
+        const result = document.getElementById("result");
+
+        // Conversion function
+        function celsiusToFahrenheit(celsius) {
+            return (parseFloat(celsius) * 9 / 5) + 32;
+        }
+
+        // Submit the form and convert Celsius to Fahrenheit
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const celsiusValue = celsiusInput.value;
+            const fahrenheitValue = celsiusToFahrenheit(celsiusValue);
+            result.textContent = `${celsiusValue}°C is equal to ${fahrenheitValue}°F`;
+        });
+
+        // Set initial Celsius value to 90°C
+        celsiusInput.value = "90";
+        const initialFahrenheit = celsiusToFahrenheit("90");
+        result.textContent = `${initialFahrenheit}°F is equal to 90°C`;
+    </script>
+</body>
+</html>
